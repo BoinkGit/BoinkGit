@@ -9,5 +9,5 @@
 
 
 ### Contact Me
-✉ rmelyle@gmail.com\
+✉ rmelyle@gmail.com
 📽 @boinkyt3008 on YT
