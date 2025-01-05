@@ -1,7 +1,13 @@
 from pyray import *
 from os.path import join as os
 
-longcode = open(os("coding-project","code.txt"),"r").read()
+file = input("File Name: ")
+if file.endswith(".cb"):
+    longcode = open(os("code_byte",f"{file}"),"r").read()
+else: 
+    print("Must be type .cb file")
+    raise FileNotFoundError("Must be type .cb file")
+
 longcode = longcode.split()
 code = []
 for word in longcode:
@@ -16,6 +22,7 @@ for i in range(len(code)):
 
 bytVar = [0,0,0,0,0,0,0,0]
 intVar = [0,0,0,0,0,0,0,0]
+flags = {}
 
 colorList = [BLACK,WHITE, RED,GREEN,DARKBLUE, YELLOW,VIOLET,SKYBLUE]
 pointer = Vector2(0,0)
@@ -80,6 +87,12 @@ while not window_should_close():
             
             index += 4
 
+# SET FLAG
+        elif num == 7:
+            if code[index+1] == 0:
+                flags[f"{code[index+2]}"] = index - 1
+            elif code[index+1] == 2:
+                index = list(flags.keys())[list(flags.values()).index(code[index[2]])]
 
 # DRAW SCREEN
     for rect in rects:
