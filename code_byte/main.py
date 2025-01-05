@@ -44,11 +44,18 @@ while not window_should_close():
 # SET POINTER POSITION
         if num == 0:
             if code[index+1] == 0:
-                pointer.x = eval(f"0o{code[index+2]}{code[index+3]}")*8
-                pointer.y = eval(f"0o{code[index+4]}{code[index+5]}")*8
-            if code[index+1] == 1:
+                pointer.x = eval(f"0o{code[index+2:3]}")*8
+                pointer.y = eval(f"0o{code[index+4:3]}")*8
+            elif code[index+1] == 1:
                 pointer.x += eval(f"0o{code[index+3]}")*[8,-8][code[index+2]]
-                pointer.y += eval(f"0o{code[index+5]}")*[8,-8][code[index+1]]
+                pointer.y += eval(f"0o{code[index+5]}")*[8,-8][code[index+4]]
+            elif code[index+1] == 2:
+                pointer.x = int(intVar[code[index+3]],8)
+                pointer.x = int(intVar[code[index+5]],8)
+            elif code[index+1] == 3:
+                pointer.x = intVar[code[index+3]][1]*[8,-8][intVar[code[index+3]][0]]
+                pointer.x = intVar[code[index+5]][1]*[8,-8][intVar[code[index+3]][0]]
+                pass
             
             index += 5
 
