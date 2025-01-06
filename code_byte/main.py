@@ -1,7 +1,7 @@
 from pyray import *
 from os.path import join as os
 
-file = input("File Name: ")
+file = "proof.cb" #input("File Name: ")
 if file.endswith(".cb"):
     longcode = open(os("code_byte",f"{file}"),"r").read()
 else: 
@@ -23,6 +23,7 @@ for i in range(len(code)):
 bytVar = [0,0,0,0,0,0,0,0]
 intVar = [0,0,0,0,0,0,0,0]
 flags = {}
+loops = 0
 
 colorList = [BLACK,WHITE, RED,GREEN,DARKBLUE, YELLOW,VIOLET,SKYBLUE]
 pointer = Vector2(0,0)
@@ -33,7 +34,7 @@ index = 0
 
 init_window(512,512,"Fantasy Console")
 
-set_target_fps(5)
+set_target_fps(30)
 
 while not window_should_close():
     begin_drawing()
@@ -44,8 +45,8 @@ while not window_should_close():
 # SET POINTER POSITION
         if num == 0:
             if code[index+1] == 0:
-                pointer.x = eval(f"0o{code[index+2:3]}")*8
-                pointer.y = eval(f"0o{code[index+4:3]}")*8
+                pointer.x = eval(f"0o{code[index+2]}{code[index+3]}")*8
+                pointer.y = eval(f"0o{code[index+4]}{code[index+5]}")*8
             elif code[index+1] == 1:
                 pointer.x += eval(f"0o{code[index+3]}")*[8,-8][code[index+2]]
                 pointer.y += eval(f"0o{code[index+5]}")*[8,-8][code[index+4]]
@@ -98,8 +99,10 @@ while not window_should_close():
         elif num == 7:
             if code[index+1] == 0:
                 flags[f"{code[index+2]}"] = index - 1
-            elif code[index+1] == 2:
-                index = list(flags.keys())[list(flags.values()).index(code[index[2]])]
+            elif code[index+1] == 1:
+                index = flags[f"{code[index+2]}"] - 2
+                loops += 1
+            index += 2
 
 # DRAW SCREEN
     for rect in rects:
@@ -109,6 +112,8 @@ while not window_should_close():
     draw_text(f"intVar: {intVar}",0,490,20,WHITE)
     end_drawing()
 
+    if loops >= 100:
+        raise RecursionError()
 # OTHER
     index += 1
 
