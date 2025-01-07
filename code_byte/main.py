@@ -1,7 +1,7 @@
 from pyray import *
 from os.path import join as os
 
-file = "proof.cb" #input("File Name: ")
+file = "load_white.cb" #input("File Name: ")
 if file.endswith(".cb"):
     longcode = open(os("code_byte",f"{file}"),"r").read()
 else: 
@@ -100,9 +100,9 @@ while not window_should_close():
             intVar[code[index+1]] = int(f"{intVar[code[index+1]]}",8)
 
             if code[index+3] == 0:
-                value = int(f"{code[index+4]}{code[index+5]}")
+                value = int(f"{code[index+4]}{code[index+5]}",8)
             elif code[index+3] == 1:
-                value = intVar[int({code[index+5]},8)]
+                value = intVar[int(f"{code[index+5]}",8)]
 
             if code[index+2] == 0: # +=
                 intVar[code[index+1]] += value
@@ -114,6 +114,7 @@ while not window_should_close():
                 intVar[code[index+1]] //= value
 
             intVar[code[index+1]] = int(oct(intVar[code[index+1]] % 64).removeprefix("0o"))
+            print(int(f"{intVar[code[index+1]]}",8))
             index += 5
 # SET FLAG
         elif num == 7:

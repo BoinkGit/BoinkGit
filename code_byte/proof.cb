@@ -7,6 +7,7 @@ for ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, and SEVEN
 0 1 01 00 <-- move +xu +yz
 1 1 <-- color to white
 4 0 2 0 02
+4 0 1 0 24
 7 1 1 <-- go to flag ONE
 0 1 00 01 <-- move +xz +yu
 1 1 <-- white
