@@ -1,7 +1,7 @@
 from pyray import *
 from os.path import join as os
 
-file = "load_white.cb" #input("File Name: ")
+file = "proof.cb" #input("File Name: ")
 if file.endswith(".cb"):
     longcode = open(os("code_byte",f"{file}"),"r").read()
 else: 
