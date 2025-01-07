@@ -81,7 +81,7 @@ while not window_should_close():
 # SET VARIABLE INTEGER
         elif num == 3:
             if code[index+2] == 0:
-                intVar[code[index+1]] = eval(f"{code[index+3]}{code[index+4]}")
+                intVar[code[index+1]] = int(f"{code[index+3]}{code[index+4]}")
             elif code[index+2] == 1:
                 intVar[code[index+1]] = bytVar[code[index+4]]
             elif code[index+2] == 2:
@@ -95,6 +95,26 @@ while not window_should_close():
             
             index += 4
 
+# MATH VARIABLE INTEGER
+        elif num == 4:
+            intVar[code[index+1]] = int(f"{intVar[code[index+1]]}",8)
+
+            if code[index+3] == 0:
+                value = int(f"{code[index+4]}{code[index+5]}")
+            elif code[index+3] == 1:
+                value = intVar[int({code[index+5]},8)]
+
+            if code[index+2] == 0: # +=
+                intVar[code[index+1]] += value
+            elif code[index+2] == 1: # -=
+                intVar[code[index+1]] -= value
+            elif code[index+2] == 2: # *=
+                intVar[code[index+1]] *= value
+            elif code[index+2] == 3: # /=
+                intVar[code[index+1]] //= value
+
+            intVar[code[index+1]] = int(oct(intVar[code[index+1]] % 64).removeprefix("0o"))
+            index += 5
 # SET FLAG
         elif num == 7:
             if code[index+1] == 0:
@@ -112,8 +132,6 @@ while not window_should_close():
     draw_text(f"intVar: {intVar}",0,490,20,WHITE)
     end_drawing()
 
-    if loops >= 100:
-        raise RecursionError()
 # OTHER
     index += 1
 

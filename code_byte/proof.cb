@@ -1,8 +1,12 @@
-0 0 00 00
-1 1
-7 0 1
-0 1 01 00
-1 1
-7 1 1
-0 1 00 01
-1 1
+i will be using: z u b t q p h s
+for ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, and SEVEN
+3 0 0 01
+0 0 00 00 <-- go to xz yz
+1 1 <-- color to white
+7 0 1 <-- loop start, name ONE
+0 1 01 00 <-- move +xu +yz
+1 1 <-- color to white
+4 0 2 0 02
+7 1 1 <-- go to flag ONE
+0 1 00 01 <-- move +xz +yu
+1 1 <-- white
