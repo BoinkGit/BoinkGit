@@ -4,6 +4,8 @@
     1. [SET POINTER](#0---set-pointer-position)
     2. [SET COLOR](#1---set-color)
     3. [SET VARIABLE (BYTE)](#2---set-variable-byte)
+    4. [SET VARIABLE (INTEGER)](#3---set-variable-integer)
+    5. [MATH SET VARIABLE](#4---math-set-variable-integer)
 
 # FUNCTIONS
 
@@ -70,9 +72,26 @@
     * 4 - marker x
     * 5 - markey y
 3. based on options for argument 2
-    * the number as a integer
+    * the number as an integer
     * the variable byte (two digits)
     * the variable byte (two digits)
     * nothing, but MUST be written (two digits)
     * nothing, but MUST be written (two digits)
     * nothing, but MUST be written (two digits)
+
+## 4 - MATH SET VARIABLE (INTEGER)
+
+* takes 5 arguments
+1. which variable
+2. there are four options
+    * 0 - +=
+    * 1 - -=
+    * 2 - *=
+    * 3 - /=
+        * the output of the division is floored
+3. whether its from a variable
+    * 0 - number
+    * 1 - integer variable
+4. based on option for argument 3
+    * the number as an integer
+    * the variable byte (two digits)
