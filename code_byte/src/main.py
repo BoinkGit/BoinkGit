@@ -1,9 +1,9 @@
 from pyray import *
 from os.path import join as os
 
-file = "proof.cb" #input("File Name: ")
+file = "load_white.cb" #input("File Name: ")
 if file.endswith(".cb"):
-    longcode = open(os("code_byte",f"{file}"),"r").read()
+    longcode = open(os("code_byte","programs",f"{file}"),"r").read()
 else: 
     print("Must be type .cb file")
     raise FileNotFoundError("Must be type .cb file")
@@ -34,7 +34,7 @@ index = 0
 
 init_window(512,512,"Fantasy Console")
 
-set_target_fps(30)
+set_target_fps(10)
 
 while not window_should_close():
     begin_drawing()
@@ -111,10 +111,11 @@ while not window_should_close():
             elif code[index+2] == 2: # *=
                 intVar[code[index+1]] *= value
             elif code[index+2] == 3: # /=
-                intVar[code[index+1]] //= value
+                if value == 0:
+                    intVar[code[index+1]] = 0
+                else: intVar[code[index+1]] //= value
 
             intVar[code[index+1]] = int(oct(intVar[code[index+1]] % 64).removeprefix("0o"))
-            print(int(f"{intVar[code[index+1]]}",8))
             index += 5
 # SET FLAG
         elif num == 7:
