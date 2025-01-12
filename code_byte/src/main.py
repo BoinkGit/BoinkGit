@@ -1,7 +1,7 @@
 from pyray import *
 from os.path import join as os
 
-file = "load_white.cb" #input("File Name: ")
+file = "load_white.cb"  #input("File Name: ")
 if file.endswith(".cb"):
     longcode = open(os("code_byte","programs",f"{file}"),"r").read()
 else: 
@@ -34,7 +34,7 @@ index = 0
 
 init_window(512,512,"Fantasy Console")
 
-set_target_fps(10)
+#set_target_fps(60)
 
 while not window_should_close():
     begin_drawing()
@@ -51,11 +51,11 @@ while not window_should_close():
                 pointer.x += eval(f"0o{code[index+3]}")*[8,-8][code[index+2]]
                 pointer.y += eval(f"0o{code[index+5]}")*[8,-8][code[index+4]]
             elif code[index+1] == 2:
-                pointer.x = int(intVar[code[index+3]],8)
-                pointer.x = int(intVar[code[index+5]],8)
+                pointer.x = int(f"{intVar[code[index+3]]}",8)*8
+                pointer.y = int(f"{intVar[code[index+5]]}",8)*8
             elif code[index+1] == 3:
                 pointer.x = intVar[code[index+3]][1]*[8,-8][intVar[code[index+3]][0]]
-                pointer.x = intVar[code[index+5]][1]*[8,-8][intVar[code[index+3]][0]]
+                pointer.y = intVar[code[index+5]][1]*[8,-8][intVar[code[index+5]][0]]
                 pass
             
             index += 5
