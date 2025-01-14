@@ -18,19 +18,37 @@ set_target_fps(60)
 sand = load_sound(os.path.join(path,"assets","epic_sand.wav"))
 bed = load_texture(os.path.join(path,"assets","bed.png"))
 
-vol_tick = 0
+class player:
+    def __init__(self,x,y,vx,vy):
+        self.x = x
+        self.y = y
+        self.vx = vx
+        self.vy = vy
+        print(self)
+    def shoot(self):
+        return bullet(self,0,0,0,0,'big')
 
+class bullet:
+    def __init__(self,player,x,y,vx,vy,type):
+        self.player = player
+        self.x = x
+        self.y = y
+        self.vx = vx
+        self.vy = vy
+        self.type = type
 
+c = player(0,0,92,0)
+
+d = c.shoot()
+
+print(d.player.vx)
+# dang that works?!
 while not window_should_close():
     begin_drawing()
     
-    if not is_sound_playing(sand):
-        play_sound(sand)
-    vol = m.sin(vol_tick/2)+.5
-    set_sound_volume(sand,vol)
-    draw_texture_ex(bed,Vector2(10,10),0,10,WHITE)
-    draw_text(f"{round(vol,2)}",100,100,20,PURPLE)
-    vol_tick += .1
+    
+    
+
     end_drawing()
 close_audio_device()
 close_window()
