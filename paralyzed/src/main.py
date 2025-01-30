@@ -25,6 +25,15 @@ class player:
         self.vx = vx
         self.vy = vy
         print(self)
+    def move(self,up,down,left,right):
+        self.vx += is_key_down(right)-is_key_down(left)
+        self.vy -= is_key_down(up)-is_key_down(down)
+        self.vx *= .8
+        self.vy *= .8
+        self.x += self.vx
+        self.y += self.vy
+    def draw(self):
+        draw_rectangle_v(Vector2(self.x,self.y),Vector2(50,50),RED)
     def shoot(self):
         return bullet(self,0,0,0,0,'big')
 
@@ -45,7 +54,9 @@ print(d.player.vx)
 # dang that works?!
 while not window_should_close():
     begin_drawing()
-    
+    clear_background(BLACK)
+    c.draw()
+    c.move(KEY_W,KEY_S,KEY_A,KEY_D)
     
     
 
