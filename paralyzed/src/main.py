@@ -43,6 +43,7 @@ class player:
         self.vx = vx
         self.vy = vy
         print(self)
+<<<<<<< HEAD
     def set_extras(self,friction,gravity):
         self.friction = friction
         self.gravity = gravity
@@ -51,6 +52,17 @@ class player:
         self.down = down
         self.left = left
         self.right = right
+=======
+    def move(self,up,down,left,right):
+        self.vx += is_key_down(right)-is_key_down(left)
+        self.vy -= is_key_down(up)-is_key_down(down)
+        self.vx *= .8
+        self.vy *= .8
+        self.x += self.vx
+        self.y += self.vy
+    def draw(self):
+        draw_rectangle_v(Vector2(self.x,self.y),Vector2(50,50),RED)
+>>>>>>> d1b5df083cb54df5d2c2a3c816bdb0c97da4e194
     def shoot(self):
         direction = normal_angle(self.x,self.y,get_mouse_x(),get_mouse_y(),1)
         return bullet(self,direction[0],direction[1],0,0,'big')
@@ -92,11 +104,16 @@ b = c.shoot()
 while not window_should_close():
     begin_drawing()
     clear_background(BLACK)
+<<<<<<< HEAD
     c.draw(20,20)
     c.move()
     if is_mouse_button_pressed(0):
         b = c.shoot()
     b.draw()
+=======
+    c.draw()
+    c.move(KEY_W,KEY_S,KEY_A,KEY_D)
+>>>>>>> d1b5df083cb54df5d2c2a3c816bdb0c97da4e194
     
     
 
