@@ -1,0 +1,30 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 6, in script
+    define me = Character("Me", "#f3a4f3")
+  File "game/script.rpy", line 6, in <module>
+    define me = Character("Me", "#f3a4f3")
+TypeError: 'kind' is an invalid keyword argument for str()
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 6, in script
+    define me = Character("Me", "#f3a4f3")
+  File "D:\Downloads\renpy-8.3.4-sdk\renpy-8.3.4-sdk\renpy\ast.py", line 2241, in execute
+    self.set()
+  File "D:\Downloads\renpy-8.3.4-sdk\renpy-8.3.4-sdk\renpy\ast.py", line 2255, in set
+    value = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "D:\Downloads\renpy-8.3.4-sdk\renpy-8.3.4-sdk\renpy\python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 6, in <module>
+    define me = Character("Me", "#f3a4f3")
+  File "D:\Downloads\renpy-8.3.4-sdk\renpy-8.3.4-sdk\renpy\character.py", line 1778, in Character
+    return type(kind)(name, kind=kind, **properties)
+TypeError: 'kind' is an invalid keyword argument for str()
+
+Windows-10-10.0.19045 AMD64
+Ren'Py 8.3.4.24120703
+Vis1test 1.0
+Tue Feb  4 18:30:27 2025
