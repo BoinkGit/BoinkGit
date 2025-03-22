@@ -20,4 +20,8 @@
 
 ### how does this robot work?
 - lil code editor you can open by clicking on robot when game is like pre-round
-- you have a set amount of commands, but can buy
+- you have a set amount of commands, but can buy parts from the mouse shop
+- has sensors and moters
+  - sensors can:
+    -
+  - motors can:
