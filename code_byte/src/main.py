@@ -1,12 +1,14 @@
 from pyray import *
 from os.path import join as os
 
-file = "load_white.cb"  #input("File Name: ")
+file = "load_rainbow.cb"  #input("File Name: ")
 if file.endswith(".cb"):
     longcode = open(os("code_byte","programs",f"{file}"),"r").read()
 else: 
     print("Must be type .cb file")
     raise FileNotFoundError("Must be type .cb file")
+
+b64 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-"
 
 longcode = longcode.split()
 code = []
@@ -26,9 +28,9 @@ flags = {}
 loops = 0
 
 colorList = [BLACK,WHITE, RED,GREEN,DARKBLUE, YELLOW,VIOLET,SKYBLUE]
-pointer = Vector2(0,0)
 
-rects = {}
+pointer = Vector2(0,0)
+pixels = {}
 
 index = 0
 
@@ -37,8 +39,7 @@ init_window(512,512,"Fantasy Console")
 #set_target_fps(60)
 
 while not window_should_close():
-    begin_drawing()
-    clear_background(BLACK)
+    #begin_drawing()
     if index < len(code):
         num = code[index]
 
@@ -62,8 +63,14 @@ while not window_should_close():
 
 # SET COLOR
         elif num == 1:
-            rects[f"({pointer.x}, {pointer.y})"] = colorList[code[index+1]]
-            index += 1
+            if code[index+1] == 0:
+                draw_rectangle(int(pointer.x),int(pointer.y),3,3,colorList[code[index+2]])
+                pixels[f"{b64[int(pointer.x/8-1)]}{b64[int(pointer.y/8-1)]}"] = code[index+2]
+            if code[index+1] == 1:
+                draw_rectangle(int(pointer.x),int(pointer.y),3,3,colorList[bytVar[code[index+2]]])
+                pixels[f"{b64[int(pointer.x/8-1)]}{b64[int(pointer.y/8-1)]}"] = bytVar[code[index+2]]
+
+            index += 2
 
 # SET VARIABLE BYTE
         elif num == 2:
@@ -74,7 +81,7 @@ while not window_should_close():
             elif code[index+2] == 2:
                 bytVar[code[index+1]] = (int(f"0o{intVar[code[index+3]]}",8) % 8)
             elif code[index+2] == 3:
-                bytVar[code[index+1]] = colorList.index(rects[f"({pointer.x}, {pointer.y})"])
+                bytVar[code[index+1]] = colorList.index(pixels[f"{b64[int(pointer.x/8-1)]}{b64[int(pointer.y/8-1)]}"])
 
             index += 3
 
@@ -87,7 +94,7 @@ while not window_should_close():
             elif code[index+2] == 2:
                 intVar[code[index+1]] = intVar[code[index+4]]
             elif code[index+2] == 3:
-                intVar[code[index+1]] = colorList.index(rects[f"({pointer.x}, {pointer.y})"])
+                intVar[code[index+1]] = colorList.index(pixels[f"{b64[int(pointer.x/8-1)]}{b64[int(pointer.y/8-1)]}"])
             elif code[index+2] == 4:
                 intVar[code[index+1]] = int(oct(int(pointer.x // 8)).removeprefix("0o"))
             elif code[index+2] == 5:
@@ -127,11 +134,8 @@ while not window_should_close():
             index += 2
 
 # DRAW SCREEN
-    for rect in rects:
-       draw_rectangle(int(eval(rect)[0]),int(eval(rect)[1]),8,8,rects[rect])
-    draw_circle_v(pointer,2,ORANGE)
-    draw_text(f"bytVar: {bytVar}",0,470,20,WHITE)
-    draw_text(f"intVar: {intVar}",0,490,20,WHITE)
+    #draw_text(f"bytVar: {bytVar}",0,470,20,WHITE)
+    #draw_text(f"intVar: {intVar}",0,490,20,WHITE)
     end_drawing()
 
 # OTHER
@@ -139,3 +143,5 @@ while not window_should_close():
 
 
 close_window()
+
+print(len(b64))
